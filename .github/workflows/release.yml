@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v3
         with:
-          node-version: 18
+          node-version: 20
           registry-url: 'https://registry.npmjs.org/'
 
       - name: Extract Library and Version
@@ -32,13 +32,15 @@ jobs:
           echo "Library: $LIBRARY"
           echo "Version: $VERSION"
 
-      - name: Install Dependencies
+      - name: Install Root Dependencies
+        run: npm ci
+
+      - name: Install Library Dependencies
         working-directory: projects/${{ env.LIBRARY }}
         run: npm ci
 
       - name: Build Library
-        working-directory: projects/${{ env.LIBRARY }}
-        run: npm run build
+        run: npx ng build ${{ env.LIBRARY }} --configuration=production
 
       - name: Publish to npm
         working-directory: dist/${{ env.LIBRARY }}
