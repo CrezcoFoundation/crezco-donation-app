@@ -1,0 +1,7 @@
+<div class="payment-card-container text-center">
+  <h3 class="mb-4">Información de la Tarjeta</h3>
+  <div #cardElement class="card-element mb-4 p-3 border rounded"></div>
+  <button (click)="handleDonation()" class="btn btn-success btn-lg">
+    {{ donationType === 'recurring' ? 'Guardar Método de Pago' : 'Confirmar Pago' }}
+  </button>
+</div>
